@@ -39,3 +39,25 @@ ii) Configured Scheduling
 For low latency devices, configured scheduling is used and it has a mechanism known as semi-persistent scheduling or SPS. Let us take an example of a robot. In this scenario, the remote control information is reaching the robot very frequently. And the resources are scheduled with a certain time interval or periodicity. In every millisecond, the information was supposed to go from the remote control to the robot. In this case, it will send the downlink control information or DCI every time because it repeats itself frequently.
 
 First, the periodicity should be defined for the device. After that, the device looks periodicity which is now activated and ready to receive the information periodically. Now in subsequent transmission, there is no control information transmission taking place. After that, when there is no periodic data to be sent then the periodicity gets deactivated by sending the information through DCI. So when there is the periodic transmission of control information with the feature of activating and deactivating whenever necessary is known as semi-persistent scheduling.
+
+### UPLINK SCHEDULING
+
+Here, the scheduler was again located at the RAN. For the uplink, it needs to know the channel characteristic. For that purpose, the device starts transmitting the reference signal. So based on this reference signal, the channel quality can be estimated by the RAN. In the uplink, the UE knows the buffer status, so it was shared with the RAN. First, based on this information, the RAN scheduler will send the scheduling information to the various devices. It contains information about the device's transmission timing and the resources that the device can use for transmission.
+
+This scheduling information is known as schedule grants. In Uplink, the device uses a reference signal known as SRS or sounding reference signal. It was sent during the uplink by different devices. Based on the information coming from SRS, the RAN can estimate the channel quality. It will make the decision based on the SRS information. In SRS, it can support 4 antenna ports while during downlink, the CSI-RS use up to 30 antenna port. 
+
+**i) Dynamic scheduling**
+
+The device will send the scheduling request having the information that the uplink data to be shared with the RAN. After that, the RAN provides the scheduling grant (which we have discussed previously) to the device. Now, after receiving the scheduling grant the device will send the uplink data through the PUSCH by utilizing the resources allocated for this particular transmission. After that, if there is a needs to send more uplink data, then the device will reallocate all the resources for uplink transmission. 
+
+**ii) Configured scheduling**
+
+**Type 1**
+
+In starting step, on getting the scheduling requests, the RAN sends the scheduling grants with periodicity. Therefore, the device in this case can send the uplink data frequently for a given periodic time interval. When the transmission is complete, the RAN will send a scheduling grant to stop the periodic transmission.
+
+**Type 2**
+
+It is also known as Semi-Persistent Scheduling. Here also the periodicity is defined. After that, the set of information is sent to the device using the DCI, which will help in activating and deactivating the periodicity. When it is activated, the device can transmit the data send and in the subsequent transmission is not required to send the DCI. After that when the uplink data is sent successfully. Then the RAN send the information to stop or deactivate the periodicity through the DCI. 
+
+So in type 1, when there is a need to do periodicity again then it has to reconfigure it again. While in type 2, the previous configuration is kept. Due to this they only need to activate or deactivate the periodicity without reconfiguring it again.
